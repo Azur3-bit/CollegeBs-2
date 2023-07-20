@@ -43,6 +43,7 @@ int main(int argc, char const *argv[])
     emp1.EmpName = "Sunil";
     emp1.EmpDept = "Finace";
     emp1.EmpId = 12345;
+    emp1.EmpSalary= 200;
     emp1.Desg = "CFO";
 
     // -- Printing Details
@@ -50,6 +51,7 @@ int main(int argc, char const *argv[])
     cout << "Department : " << emp1.EmpDept << endl;
     cout << "Emp id : " << emp1.EmpId << endl;
     cout << "Desg. : " << emp1.Desg << endl;
+    cout << "Salary : " << emp1.EmpSalary << endl;
 
     return 0;
 }
