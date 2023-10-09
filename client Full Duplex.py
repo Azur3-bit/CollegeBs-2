@@ -1,14 +1,15 @@
-# server Full Duplex
+# write the client program for the above server
+# Path: client_Full_Duplex.py
+# client Full Duplex
 
-
-import socket 
+import socket
 import threading
 import sys
-def recv_from_client(conn):
+def recv_from_server(conn):
     global FLAG
     try:
         while True:
-            if FLAG  == True:
+            if FLAG == True:
                 break
             messsage = conn.recv(1024).decode()
             if messsage == 'quit':
@@ -17,10 +18,10 @@ def recv_from_client(conn):
                 print("connection Closed !")
                 FLAG = True
                 break
-            print('client : '+messsage)
+            print('server : '+messsage)
     except:
         conn.close()
-def send_to_client(conn):
+def send_to_server(conn):
     global FLAG
     try:
         while True:
@@ -42,15 +43,11 @@ def main():
     global FLAG
     HOST = 'localhost'
     serverPort = 6500
-    serverSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    serverSocket.bind((HOST,serverPort))
-    print("socket binded !")
-    serverSocket.listen(1)
-    print("listening ... ")
-    connectionSocket, addr = serverSocket.accept()
-    print("connection established wiht the client on addr : ",addr,"\n")
-    t_rev = threading.Thread(target=recv_from_client,args = (connectionSocket,))
-    t_send = threading.Thread(target=send_to_client,args = (connectionSocket,))
+    clientSocket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    clientSocket.connect((HOST,serverPort))
+    print("connection established wiht the server on addr : ",(HOST,serverPort),"\n")
+    t_rev = threading.Thread(target=recv_from_server,args = (clientSocket,))
+    t_send = threading.Thread(target=send_to_server,args = (clientSocket,))
     threads.append(t_rev)
     threads.append(t_send)
     t_rev.start()
@@ -58,9 +55,8 @@ def main():
     t_rev.join()
     t_send.join()
     print("EXITING !")
-    serverSocket.close()
+    clientSocket.close()
     sys.exit()
 if __name__ == "__main__":
     main()
     
-                   
