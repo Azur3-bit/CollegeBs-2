@@ -25,6 +25,11 @@ def travellingSalesmanProblem(graph, s):
     print("minimum path distance is : ", min_path)
 
 
-graph = [[0, 10, 15, 20], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]]
+graph = [
+    [0, 1001, 1501, 2001],
+    [1001, 0, 3501, 2501],
+    [1501, 3501, 0, 3001],
+    [2001, 2501, 3001, 0],
+]
 s = 0
 print(travellingSalesmanProblem(graph, s))

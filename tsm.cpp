@@ -156,10 +156,10 @@ int travllingSalesmanProblem(int graph[][V], int s)
 void solve()
 {
     // cout << "working\n";
-    int graph[][V] = {{0, 10, 15, 20},
-                      {10, 0, 35, 25},
-                      {15, 35, 0, 30},
-                      {20, 25, 30, 0}};
+    int graph[][V] = {{0, 1001, 1501, 2001},
+                      {1001, 0, 3501, 2501},
+                      {1501, 3501, 0, 3001},
+                      {2001, 2501, 3001, 0}};
     int s = 0;
     // cout << "working \n";
     cout << "--------------- result\n";
