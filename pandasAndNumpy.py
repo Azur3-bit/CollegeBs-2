@@ -4,4 +4,4 @@ import pandas as pd
 print("-----------------\n")
 print("module has been imported...\n")
 df = pd.read_csv("student.csv")
-print(df)
+print(df.to_string())
