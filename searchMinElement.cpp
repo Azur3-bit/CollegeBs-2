@@ -129,28 +129,35 @@ int answer(vector<int> nums)
     dbg(nums);
     int low = 0;
     int high = nums.size() - 1;
-    while (low <= high)
+    int min_element = INT_MAX;
+    while (high - low >= 1)
     {
         dbg(nums[low]);
         dbg(nums[high]);
         int mid = low + (high - low) / 2;
+        min_element = min(min_element, nums[mid]);
         dbg(nums[mid]);
         if (nums[mid] > nums[low])
-            low = mid;
+            high = mid - 1; // lower half working properly , upper half issue
         else
-            high = mid;
+            low = mid + 1;
+        min_element = min(min_element, nums[high]);
+        min_element = min(min_element, nums[low]);
 
         // break;
     }
     cout << "-----------------\n";
-    dbg(low);
-    dbg(high);
-    return 0;
+    dbg(nums[low]);
+    dbg(nums[high]);
+    return min_element;
+    // return 0;
 }
 void solve()
 {
     vector<int> nums = {3, 4, 5, 1, 2};
-    answer(nums);
+    //                   l   m   l    h
+    int ans = answer(nums);
+    dbg(ans);
     // cout << "working \n";
 }
 // ------------------------------------------------------------------ main
