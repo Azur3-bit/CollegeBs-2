@@ -130,7 +130,7 @@ int answer(vector<int> nums)
     int low = 0;
     int high = nums.size() - 1;
     int min_element = INT_MAX;
-    while (high - low >= 1)
+    while (high > low)
     {
         dbg(nums[low]);
         dbg(nums[high]);
@@ -138,9 +138,9 @@ int answer(vector<int> nums)
         min_element = min(min_element, nums[mid]);
         dbg(nums[mid]);
         if (nums[mid] > nums[low])
-            high = mid - 1; // lower half working properly , upper half issue
+            low = mid + 1; // lower half working properly , upper half issue
         else
-            low = mid + 1;
+            high = mid - 1;
         min_element = min(min_element, nums[high]);
         min_element = min(min_element, nums[low]);
 
