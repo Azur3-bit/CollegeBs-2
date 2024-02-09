@@ -137,10 +137,11 @@ int answer(vector<int> nums)
         int mid = low + (high - low) / 2;
         min_element = min(min_element, nums[mid]);
         dbg(nums[mid]);
-        if (nums[mid] > nums[low])
-            low = mid + 1; // lower half working properly , upper half issue
+        if (nums[mid + 1] > nums[mid - 1])
+            high = mid - 1; // lower half working properly , upper half issue
+        // else if (nums[low] < nums[mid])
         else
-            high = mid - 1;
+            low = mid + 1;
         min_element = min(min_element, nums[high]);
         min_element = min(min_element, nums[low]);
 
@@ -154,8 +155,11 @@ int answer(vector<int> nums)
 }
 void solve()
 {
-    vector<int> nums = {3, 4, 5, 1, 2};
-    //                   l   m   l    h
+    // vector<int> nums = {11, 13, 15, 17};
+    // vector<int> nums = {3, 4, 5, 1, 2};
+    vector<int> nums = {4, 5, 6, 7, 0, 1, 2};
+    //                   l           h
+    //      m
     int ans = answer(nums);
     dbg(ans);
     // cout << "working \n";
