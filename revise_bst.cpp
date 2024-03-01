@@ -76,7 +76,10 @@ void levelOrder(node * root){
 	q.push(root);
 
 	while(!q.empty()){
-	
+		int lvl_size = q.size();
+		for(int i =0; i<lvlsize ; ++i){
+			
+		}	
 	
 	}
 }
