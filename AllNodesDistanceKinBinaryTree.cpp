@@ -112,8 +112,46 @@ vector<int> answer(treenode *root, int target_int, int distace_int ){
     dbg(parent_map);
 
     map<treenode *, bool> visited{};
-    
-    return {};
+
+    queue<treenode *> q{};
+    q.push(root);
+    visited[root] = true;
+    vector<vector<int>> ans = {{root->val}};
+    while (!q.empty())
+    {
+        vector<int> temp_local{};
+        int size = q.size();
+        for (int i = 0; i < size;i++){
+            treenode *node = q.front();
+            q.pop();
+            // left and right nodes
+            if(node->left){
+                if(!visited[node->left]){
+                    q.push(node->left);
+                    visited[node->left] = true;
+                    temp_local.push_back(node->left->val);
+                }
+            }
+            if(node->right){
+                if(!visited[node->right]){
+                    q.push(node->right);
+                    visited[node->right] = true;
+                    temp_local.push_back(node->right->val);
+                }
+            }
+            // parent nodes
+            if(parent_map.find(node) != parent_map.end()){
+                if(!visited[parent_map[node]]){
+                    treenode *p = parent_map[node];
+
+                    q.push(p);
+                    visited[p] = true;
+                    temp_local.push_back(p->val);
+                }
+            }
+        }
+    }
+    return ans[distace_int - 1];
 }
 
 void solve() {
