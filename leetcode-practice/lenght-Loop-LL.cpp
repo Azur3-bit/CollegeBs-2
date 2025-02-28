@@ -53,6 +53,26 @@ treenode* createBinaryTree(const vector<int>& vec) {if (vec.empty()) {return nul
 
 // ------------------------------------------------------------------ solve
 
+
+void linkCreation(ListNode * &head, int val){
+
+    ListNode * toBeLinkedNode = head;
+
+    while(toBeLinkedNode->val != val){
+        toBeLinkedNode = toBeLinkedNode->next;
+    }
+
+    ListNode * curr = head;
+
+    while(curr->next != nullptr){
+        curr = curr->next;
+    }
+    curr->next = toBeLinkedNode;
+    
+} 
+
+
+
 auto answer(vector<int> nums){
     // vector<int> ans {};
     int ans = 0;  
