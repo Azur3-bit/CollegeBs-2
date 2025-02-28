@@ -53,18 +53,63 @@ treenode* createBinaryTree(const vector<int>& vec) {if (vec.empty()) {return nul
 
 // ------------------------------------------------------------------ solve
 
-void linkCreation(ListNode * head, int val){
+
+ListNode * solution(ListNode * head){
+
+    if(head == nullptr || head->next == nullptr){
+        return nullptr;
+    }
+
+
+    ListNode * fast = head;
+    ListNode * slow = head;
+
+
+    while(fast->next && fast->next->next){
+
+        fast = fast->next->next;
+        slow = slow->next;
+
+
+        if(slow == fast){
+
+            slow = head;
+
+            while(fast != slow){
+
+                fast = fast->next;
+                slow = slow->next;
+            }
+
+            return slow;
+
+
+        }
+    }
+
+
+    return nullptr;
+
+
+
+}
+
+
+void linkCreation(ListNode * &head, int val){
 
     ListNode * toBeLinkedNode = head;
-
 
     while(toBeLinkedNode->val != val){
         toBeLinkedNode = toBeLinkedNode->next;
     }
 
+    ListNode * curr = head;
+
+    while(curr->next != nullptr){
+        curr = curr->next;
+    }
+    curr->next = toBeLinkedNode;
     
-
-
 } 
 
 
@@ -73,7 +118,6 @@ auto answer(vector<int> nums){
     // vector<int> ans {};
     int ans = 0;  
 
-
     ListNode * head = nullptr;
 
     vec_linkedlist(head, nums);
@@ -81,14 +125,43 @@ auto answer(vector<int> nums){
     _showLinkedList(head);
 
 
+    int linkNode = 2;
+
+
+    linkCreation(head, linkNode);
+
+    int ctr = 10;
+
+
+    ListNode * traversal = head;
+
+    while(ctr--){
+        cout << traversal->val << " -> ";
+        traversal = traversal->next;
+    }
+
+
+    ListNode * tempAns = solution(head);
+
+    traversal = tempAns;
+
+
+    cout << "\n----- X X X ---- \n";
+
+    ctr = 10;
+
+    while(ctr--){
+        cout << traversal->val << " -> ";
+        traversal = traversal->next;
+    }
+
+    cout << "\n----- X X X ---- ";
 
 
 
 
-    
+   
     return ans;
-
-
 }
 
 
@@ -106,7 +179,7 @@ void solve() {
 int main(int argc, char const* argv[]) {
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    // freopen("output.txt", "w", stdout);
 #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
